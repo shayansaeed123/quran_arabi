@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "831541946989",
+    "project_id": "quranarabi-b6ca9",
+    "storage_bucket": "quranarabi-b6ca9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831541946989:android:36b22d7ca5df01bc91ed64",
+        "android_client_info": {
+          "package_name": "com.example.quran_arabi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831541946989-do5pfthhdc6d3io0131rhidtreuft5l9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.quran_arabi",
+            "certificate_hash": "167e3b74be594d7e2bd50c5770e9c04dc76b0a07"
+          }
+        },
+        {
+          "client_id": "831541946989-a8aqkmei9h6sa9l0tmvai7pfs34g61vp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB46frPBfyN2YM0rgLcgEfDdI333CL4T08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831541946989-a8aqkmei9h6sa9l0tmvai7pfs34g61vp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
