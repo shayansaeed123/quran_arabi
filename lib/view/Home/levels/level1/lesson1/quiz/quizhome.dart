@@ -250,36 +250,7 @@ String selectedOption = '';
                             question['title'].toString(),
                             style: TextStyle(color: Colors.black),
                           ),)
-                          ),
-                        //   GridView.builder(
-                        //     shrinkWrap: true,
-                        //     physics: NeverScrollableScrollPhysics(),
-                        //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        //       crossAxisCount: 2, // Number of columns in the grid
-                        //       crossAxisSpacing: 11.0,
-                        //       mainAxisSpacing: 10.0,
-                        //       childAspectRatio: 3 / 1.5,
-                        //     ),
-                        //     itemCount: question['options'].length,
-                        //     itemBuilder: (context, optionIndex) {
-                        //       var option = question['options'][optionIndex];
-                        //       return Container(
-                        // // padding: EdgeInsets.only(top: 12,bottom:12,right:8,left:8),
-                        // // margin: EdgeInsets.only(top:20,right: 5,left: 5,bottom: 7),
-                        //     width: MediaQuery.of(context).size.width*0.99,
-                        //     height: MediaQuery.of(context).size.height*0.05,
-                        //     decoration: BoxDecoration(
-                              
-                        //       image: DecorationImage(
-                        //         fit: BoxFit.fitWidth,
-                        //         image: AssetImage("assets/images/ans.png"))),
-                        //     child:Center(child: Text(
-                        //             option['title'].toString(),
-                        //             style: TextStyle(color: Colors.black),
-                        //           ),)
-                        //   );
-                        //     },
-                        //   ),     
+                          ),   
                         GridView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
