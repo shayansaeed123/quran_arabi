@@ -680,7 +680,7 @@ class _GroupWidgetState extends State<GroupWidget> {
                     child = Center(
                       child: Text(
                         content.text_type == "1" ? content.title_arbic ?? "" : content.description ?? "",
-                        style: TextStyle(fontSize: fontSize, fontFamily: content.text_type == 1 ? "Cairo" : "Alvi", color: textColor),
+                        style: TextStyle(fontSize: fontSize, fontFamily: content.text_type == 1 ? "new2" : "new2", color: textColor),
                         textAlign: TextAlign.center,
                       ),
                     );
@@ -729,7 +729,7 @@ class _GroupWidgetState extends State<GroupWidget> {
                                   if (content.type_id == "6") ...[
                                     Text(
                                       content.text_type == "1" ? content.title_arbic ?? "" : content.description ?? "",
-                                      style: TextStyle(fontSize: fontSize, fontFamily: content.text_type == 1 ? "Cairo" : "Alvi", color: textColor),
+                                      style: TextStyle(fontSize: fontSize, fontFamily: content.text_type == 1 ? "new2" : "new2", color: textColor),
                                       textAlign: TextAlign.center,
                                     ),
                                   ],
