@@ -293,7 +293,7 @@ void playAudioFromUrl(String url) async {
                                     shrinkWrap: true,
                                     physics: NeverScrollableScrollPhysics(),
                                     gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
                                       crossAxisSpacing: 10.0,
                                       mainAxisSpacing: 10.0,
@@ -322,7 +322,7 @@ void playAudioFromUrl(String url) async {
                                             print('status $Qstatus');
                                             print('Question Id $questionId');
                                             print(selectedOptions);
-                                            setState(() {});
+                                           setState(() {});
                                             answer();
                                           });
                                         },

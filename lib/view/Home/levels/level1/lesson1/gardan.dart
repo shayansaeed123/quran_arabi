@@ -63,26 +63,6 @@ var _progress = 0.0;
   }
 }
 
-// Future<List<LessonIntroDataitems>> gardandata() async {
-//   final response = await http.post(
-//     Uri.parse('https://quranarbi.turk.pk/api/contents'),
-//     headers: <String, String>{
-//       'Content-Type': 'application/json; charset=UTF-8',
-//     },
-//     body: jsonEncode(<String, String>{
-//       'lesson_id': lesson_id,
-//       'sub_category_id': sub_category_id,
-//     }),
-//   );
-
-//   if (response.statusCode == 200) {
-//     List<dynamic> jsonData = json.decode(response.body);
-//     return jsonData.map((json) => LessonIntroDataitems.fromJson(json)).toList();
-//   } else {
-//     throw Exception('Failed to load data');
-//   }
-// }
-
 Map<String, List<LessonIntroDataitems>> groupDataByGroupId(List<LessonIntroDataitems> data) {
   Map<String, List<LessonIntroDataitems>> groupedData = {};
   for (var item in data) {
@@ -164,8 +144,6 @@ var notdatafournd=[];
   );
 
   if (response.statusCode == 200) {
-    // Successful request
-    // fetchData();
 
     print('Post request successful!');
     print("Id no");
