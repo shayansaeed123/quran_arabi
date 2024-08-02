@@ -31,88 +31,74 @@ class _QuizHomePageState extends State<QuizHomePage> {
   AudioPlayer audioPlayer = AudioPlayer();
   bool? Ansstatus;
   bool selected=false;
+   List<int?> selectedIndices = [];
+  List<String?> selectedOptions = [];
+  List<dynamic> alldata = [];
+  bool isLoading = true;
+  String Qstatus = '';
+  String questionId = '';
 
  
 
-  @override
-
-    void initstate(){
-      super.initState();
-        // fetchData();
-        audioPlayer; 
-        fetchDataQuestion();
-    }
+ @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    audioPlayer;
+    fetchDataQuestion();
+    print(lesson_id);
+  }
 int selectedIdx = -1;
-// List<String> texts = ["Text 1", "Text 2", "Text 3", "Text 4"];
-//   Future<List<quizhomemodel>> fetchData() async {
-//   var url = 'https://quranarbi.turk.pk/api/question';  
-//   print('lessen id $lesson_id');
-//   var body = {
-//     'lesson_id': lesson_id,
-//   };
-//   var headers = {
-//     'Content-Type': 'application/json',
-//   };
-//   var response = await http.post(
-//     Uri.parse(url),
-//     headers: headers,
-//     body: jsonEncode(body),
-//   );
-//   if (response.statusCode == 200) {
-//     print('quizzz res ${response.body}');
-//   } else {
-//     print('Post request failed with status: ${response.statusCode}');
-//   }
-//     if (response.statusCode == 200) {
-//     List jsonResponse = json.decode(response.body);
-//     if(jsonResponse==null){
-//       return jsonResponse.map((data) => quizhomemodel.fromJson(data)).toList();
-//     }
-//   return 
-//  jsonResponse.map((data) => quizhomemodel.fromJson(data)).toList();
-//   } else {
-//     throw Exception('Unexpected error occured!');
-//   }
-// }
-List<dynamic> alldata = [];
-Future<List<dynamic>> fetchDataQuestion() async {
-  var url = 'https://quranarbi.turk.pk/api/question';  
-  print('lessen id $lesson_id');
-  var body = {
-    'lesson_id': lesson_id,
-  };
-  var headers = {
-    'Content-Type': 'application/json',
-  };
-  var response = await http.post(
-    Uri.parse(url),
-    headers: headers,
-    body: jsonEncode(body),
-  );
-  if (response.statusCode == 200) {
-    print('quizzz res ${response.body}');
-  } else {
-    print('Post request failed with status: ${response.statusCode}');
+
+
+Future<void> fetchDataQuestion() async {
+  print('gfjgdfg');
+    var url = 'https://quranarbi.turk.pk/api/question';
+    var body = {
+      'lesson_id': lesson_id, // Ensure lesson_id is defined
+    };
+    print('object $lesson_id');
+    var headers = {
+      'Content-Type': 'application/json',
+    };
+
+    try {
+      var response = await http.post(
+        Uri.parse(url),
+        headers: headers,
+        body: jsonEncode(body),
+      );
+
+      if (response.statusCode == 200) {
+        print('quizzz res ${response.body}');
+        setState(() {
+          alldata = json.decode(response.body);
+          selectedIndices = List<int?>.filled(alldata.length, null);
+          selectedOptions = List<String?>.filled(alldata.length, null);
+          isLoading = false;
+        });
+      } else {
+        print('Post request failed with status: ${response.statusCode}');
+        setState(() {
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      print('Error: $e');
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
-    if (response.statusCode == 200) {
-    alldata = json.decode(response.body);
-    // if(jsonResponse==null){
-    //   return jsonResponse.map((data) => quizhomemodel.fromJson(data)).toList();
-    // }
-    print('all data $alldata');
-  return alldata;
-  } else {
-    throw Exception('Unexpected error occured!');
-  }
-}
+
 
 Future<void> answer() async {
   var url = 'https://quranarbi.turk.pk/api/userAnswer';  
   print('lessen id $lesson_id');
   var body = {
-    'user_id': lesson_id,
-    'question_id': lesson_id,
-    'status': lesson_id,
+    'user_id': '6',
+    'question_id': questionId.toString(),
+    'status': Qstatus.toString(),
   };
   var headers = {
     'Content-Type': 'application/json',
@@ -123,16 +109,13 @@ Future<void> answer() async {
     body: jsonEncode(body),
   );
   if (response.statusCode == 200) {
-    print('quizzz res ${response.body}');
+    print('Ans response ${response.body}');
   } else {
     print('Post request failed with status: ${response.statusCode}');
   }
     if (response.statusCode == 200) {
-    alldata = json.decode(response.body);
-    // if(jsonResponse==null){
-    //   return jsonResponse.map((data) => quizhomemodel.fromJson(data)).toList();
-    // }
-    print('all data $alldata');
+    var jsonResponse = json.decode(response.body);
+    print(jsonResponse);
   } else {
     throw Exception('Unexpected error occured!');
   }
@@ -170,8 +153,41 @@ void playAudioFromUrl(String url) async {
     );
 }
 
-int? selectedIndex;
-String selectedOption = '';
+// single work 
+// bool selected=false;
+// int? selectedIndex;
+// String selectedOption = '';
+// List<dynamic> alldata = [];
+// Future<List<dynamic>> fetchDataQuestion() async {
+//   var url = 'https://quranarbi.turk.pk/api/question';  
+//   print('lessen id $lesson_id');
+//   var body = {
+//     'lesson_id': lesson_id,
+//   };
+//   var headers = {
+//     'Content-Type': 'application/json',
+//   };
+//   var response = await http.post(
+//     Uri.parse(url),
+//     headers: headers,
+//     body: jsonEncode(body),
+//   );
+//   if (response.statusCode == 200) {
+//     print('quizzz res ${response.body}');
+//   } else {
+//     print('Post request failed with status: ${response.statusCode}');
+//   }
+//     if (response.statusCode == 200) {
+//     alldata = json.decode(response.body);
+//     // if(jsonResponse==null){
+//     //   return jsonResponse.map((data) => quizhomemodel.fromJson(data)).toList();
+//     // }
+//     print('all data $alldata');
+//   return alldata;
+//   } else {
+//     throw Exception('Unexpected error occured!');
+//   }
+// } 
 
 
   @override
@@ -213,417 +229,280 @@ String selectedOption = '';
               },
             ),
             TopMenu(false, false, false, false, false),
-
             Expanded(
-      child: FutureBuilder<List<dynamic>>(
-        future: fetchDataQuestion(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Text('No data found');
-          } else {
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                var question = snapshot.data![index];
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (question['id'] == 6)
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                        padding: EdgeInsets.only(top: 12,bottom:12,right:8,left:8),
-                        margin: EdgeInsets.only(top:20,right: 5,left: 5,bottom: 7),
-                            width: MediaQuery.of(context).size.width*0.99,
-                            height: MediaQuery.of(context).size.height*0.15,
-                            decoration: BoxDecoration(
-                              
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage("assets/images/question.png"))),
-                            child:Center(child: Text(
-                            question['title'].toString(),
-                            style: TextStyle(color: Colors.black),
-                          ),)
-                          ),   
-                        GridView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, // Number of columns in the grid
-              crossAxisSpacing: 10.0,
-              mainAxisSpacing: 10.0,
-              childAspectRatio: 3 / 1.5,
-            ),
-            itemCount: question['options'].length,
-            itemBuilder: (context, optionIndex) {
-              var option = question['options'][optionIndex];
-              var status = question['options'][optionIndex]['status'];
-              bool isSelected = selectedIndex == optionIndex;
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    selectedIndex = optionIndex;
-                    selectedOption = status;
-                    print(selectedOption);
-                  });
-                },
-                child: Stack(
-                  children: [
-                    Container(
-                      // width: MediaQuery.of(context).size.width * 0.99,
-                      // height: MediaQuery.of(context).size.height * 0.05,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage("assets/images/ans.png"),
-                        ),
+      child: Column(
+        children: [
+          Expanded(
+            child: isLoading
+                ? Center(child: CircularProgressIndicator())
+                : alldata.isEmpty
+                    ? Center(child: Text('No data found'))
+                    : ListView.builder(
+                        itemCount: alldata.length + 1, // Additional item for the "Next" container
+                        itemBuilder: (context, index) {
+                          if (index == alldata.length) {
+                            // Show the "Next" container at the end of the list
+                            return Container(
+                              width: MediaQuery.of(context).size.width * 1,
+                              height: MediaQuery.of(context).size.height * 0.1,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  fit: BoxFit.fitHeight,
+                                  image: AssetImage("assets/images/button.png"),
+                                ),
+                              ),
+                              child: InkWell(
+                                onTap: () {
+                                  // Your next button action
+                                },
+                                child: Center(child: Text('Next')),
+                              ),
+                            );
+                          }
+                          var question = alldata[index];
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        top: 12, bottom: 12, right: 8, left: 8),
+                                    margin: EdgeInsets.only(
+                                        top: 20, right: 5, left: 5, bottom: 7),
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.99,
+                                    height:
+                                        MediaQuery.of(context).size.height * 0.15,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(
+                                            "assets/images/question.png"),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        question['title'].toString(),
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                    ),
+                                  ),
+                                  GridView.builder(
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 10.0,
+                                      mainAxisSpacing: 10.0,
+                                      childAspectRatio: 3 / 1.5,
+                                    ),
+                                    itemCount: question['options'].length,
+                                    itemBuilder: (context, optionIndex) {
+                                      var option =
+                                          question['options'][optionIndex];
+                                      var status =
+                                         question['options'][optionIndex]
+                                              ['status'];
+                                      var question_id =
+                                         question['options'][optionIndex]
+                                              ['question_id'];     
+                                      bool isSelected = selectedIndices.length >
+                                              index &&
+                                          selectedIndices[index] == optionIndex;
+                                      return GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            selectedIndices[index] = optionIndex;
+                                            questionId = question_id;
+                                            Qstatus = status;
+                                            selectedOptions[index] = status;
+                                            print('status $Qstatus');
+                                            print('Question Id $questionId');
+                                            print(selectedOptions);
+                                            setState(() {});
+                                            answer();
+                                          });
+                                        },
+                                        child: Stack(
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: AssetImage(
+                                                      "assets/images/ans.png"),
+                                                ),
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  option['title'].toString(),
+                                                  style: TextStyle(
+                                                      color: Colors.black),
+                                                ),
+                                              ),
+                                            ),
+                                            if (isSelected)
+                                              Positioned(
+                                                top: 8,
+                                                right: 8,
+                                                child: Icon(
+                                                  Icons.check_circle,
+                                                  color: Colors.green,
+                                                ),
+                                              ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  SizedBox(
+                                      height: MediaQuery.of(context).size.height *
+                                          0.015),
+                                ],
+                              ),
+                            ],
+                          );
+                        },
                       ),
-                      child: Center(
-                        child: Text(
-                          option['title'].toString(),
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                    ),
-                    if (isSelected)
-                      Positioned(
-                        top: 8,
-                        right: 8,
-                        child: Icon(
-                          Icons.check_circle,
-                          color: Colors.green,
-                        ),
-                      ),
-                  ],
-                ),
-              );
-            },
           ),
-                          SizedBox(height: MediaQuery.of(context).size.height*0.015,),
-                          Container(
-                            width: MediaQuery.of(context).size.width*1,
-                            height: MediaQuery.of(context).size.height*0.1,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                fit: BoxFit.fitHeight,
-                                image: AssetImage("assets/images/button.png"))),
-                            child:InkWell(
-                              onTap: (){
-
-                              },
-                              child: Center(child:  Text('Next')))
-                          )   
-                          // ...question['options'].map<Widget>((option) {
-                          //   return Text(
-                          //     option['title'].toString(),
-                          //     style: TextStyle(color: Colors.black),
-                          //   );
-                          // }).toList(),
-                        ],
-                      ),
-                  ],
-                );
-              },
-            );
-          }
-        },
+        ],
       ),
     )
-           
-//           FutureBuilder<List<quizhomemodel>>(
-//                 future: fetchData(),
-//                 builder: (context, snapshot) {
-//                   if (snapshot.hasData) {
-//                     return 
-//                     Expanded(
-//                       child: Container(
-                       
-//                       margin: EdgeInsets.only(left: 5,right: 5),
-//                       padding: EdgeInsets.all(10),
-//                       decoration: BoxDecoration(
-//                         borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30)),
-//                         image: DecorationImage(
-//                           fit: BoxFit.fitWidth,
-//                           image: AssetImage("assets/bg.jpg"))),
-//                       child:
-//                        ListView.builder(
-//                           shrinkWrap: true,
-//                           scrollDirection: Axis.vertical,
-//                           physics: ScrollPhysics(),
-//                                     itemCount: 1,
-//                                     itemBuilder: (BuildContext context, int index) {
-//                         // var imageurl=snapshot.data![index].featured_image;
-//                         // var linkapi="https://quranarbi.turk.pk/public/public/";
-//                         var answer=snapshot.data![index];
-//                         int sizefontapi=15;
-//                         int borderwidth=0;
-//                         return Column(
-//                           crossAxisAlignment: CrossAxisAlignment.center,
-//                           children: [
-                         
-//                          if(snapshot.data![index].type_id=="2")...{
-//                                            Container(
-//                         padding: EdgeInsets.only(top: 12,bottom:12,right:8,left:8),
-//                         margin: EdgeInsets.only(top:20,right: 5,left: 5,bottom: 7),
-//                             width: MediaQuery.of(context).size.width*0.99,
-//                             height: MediaQuery.of(context).size.height*0.15,
-//                             decoration: BoxDecoration(
-                              
-//                               image: DecorationImage(
-//                                 fit: BoxFit.cover,
-//                                 image: AssetImage("assets/images/question.png"))),
-//                             child:Center(child: Image.network('https://quranarbi.turk.pk/public/public/${snapshot.data![index].featured_image}'),)
-//                           ),
-//                           }
-                        
-//                          else if(snapshot.data![index].type_id=="6")...{
-                                               
-//                               Container(
-//                         padding: EdgeInsets.all(8),
-//                         margin: EdgeInsets.only(top:20,right: 10,left: 10,bottom: 10),
-//                           width: MediaQuery.of(context).size.width*0.99,
-//                             height: MediaQuery.of(context).size.height*0.15,
-//                             decoration: BoxDecoration(
-//                               image: DecorationImage(
-//                                 fit: BoxFit.cover,
-//                                 image: AssetImage("assets/images/question.png"))),
-//                             // child:Center(child: Html(
-//                             //   data: """
-//                             //     <div style="text-align: center;">
-//                             //  " ${snapshot.data![index].title}"
-//                             //     </div>
-//                             //   """, ),
-//                             //   )
-//                               ),
-//                               }
-//                         else if(snapshot.data![index].type_id=="3")...{
-                          
-//                         //   // if(snapshot.data![index].audiourl==null||snapshot.data![index].audiourl=="")...{                          
-//                         //  reusablebordercontainer(context, 0.90, 0.88, 5, reusableocontaineraudio(context, 0.88, 
-//                         //        "Audio Link Missing", (){
-//                         //         })),
-                          
-//                         //   }
-//                         //   //  else if(snapshot.data![index].audiourl!=null||snapshot.data![index].audiourl!="")...{                          
-                          
-//                               Container(
-//                         padding: EdgeInsets.all(8),
-//                         margin: EdgeInsets.only(top:20,right: 10,left: 10,bottom: 10),
-                        
-//                             width: MediaQuery.of(context).size.width*0.99,
-//                             height: MediaQuery.of(context).size.height*0.15,
-//                             decoration: BoxDecoration(
-                              
-//                               image: DecorationImage(
-//                                 fit: BoxFit.cover,
-//                                 image: AssetImage("assets/images/question.png"))),
-//                             child:Center(child:reusableocontaineraudio(context, 0.8, 
-//                               "",(){
-                         
-//                                 PlayAudio("https://quranarbi.turk.pk/public/public/${snapshot.data![index].audiourl}",context);}),)
-//                           ),},
-//                               Container(
-//                                 margin: EdgeInsets.only(bottom: 10),
-//                                padding: EdgeInsets.only(top: 10),
-//                                     width: MediaQuery.of(context).size.width*0.95,
-//                                     height: MediaQuery.of(context).size.height*0.25,
-//                                     child:   
-//                                     GridView.builder(
-                                      
-//                                        itemCount: 4,
-//                                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//                                          crossAxisSpacing: 5,
-//                           mainAxisSpacing: 5, 
-//                                     mainAxisExtent: 80,
-//                                     crossAxisCount: 2), itemBuilder: (context,index){
-//                               var length=answer.options!.length;
-//                                 return 
+
+
+// single work
+    // Expanded(
+    //           child: Column(
+    //             children: [
+    //                         Expanded(
+    //                 child: FutureBuilder<List<dynamic>>(
+    //                   future: fetchDataQuestion(),
+    //                   builder: (context, snapshot) {
+    //                     if (snapshot.connectionState == ConnectionState.waiting) {
+    //           return Center(child: CircularProgressIndicator());
+    //                     } else if (snapshot.hasError) {
+    //           return Text('Error: ${snapshot.error}');
+    //                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+    //           return Text('No data found');
+    //                     } else {
+    //           return ListView.builder(
+    //             itemCount: snapshot.data!.length,
+    //             itemBuilder: (context, index) {
+    //               var question = snapshot.data![index];
+    //               return Column(
+    //                 crossAxisAlignment: CrossAxisAlignment.start,
+    //                 children: [
+    //                   if (question['id'] == 6)
+    //                     Column(
+    //                       crossAxisAlignment: CrossAxisAlignment.start,
+    //                       children: [
+    //                         Container(
+    //                       padding: EdgeInsets.only(top: 12,bottom:12,right:8,left:8),
+    //                       margin: EdgeInsets.only(top:20,right: 5,left: 5,bottom: 7),
+    //                           width: MediaQuery.of(context).size.width*0.99,
+    //                           height: MediaQuery.of(context).size.height*0.15,
+    //                           decoration: BoxDecoration(
                                 
-                                
-//                                 InkWell( 
-//                                 onTap: (){
-//                                   setState(() {
-//                 selectedIdx = index; // Update the selected index
-//               });
-//                                   print(snapshot.data![index]);
-//                                   print(index);
-//                                   if(answer.options[index]['status']=="0"){
-//                                   // if
-//                                   // alerdialogans(context, "Wrong Answer!", 'Oops! That was incorrect. Please try again.');
-//                                  setState(() {
-                                   
-//                                  Ansstatus=false;
-//                                  print(Ansstatus);
-//                                  });
-//                                  }                                 
-//                                  else if(answer.options[index]['status']=="1"){
-//                                 //  setState(() {
-//                                    setState(() {
+    //                             image: DecorationImage(
+    //                               fit: BoxFit.cover,
+    //                               image: AssetImage("assets/images/question.png"))),
+    //                           child:Center(child: Text(
+    //                           question['title'].toString(),
+    //                           style: TextStyle(color: Colors.black),
+    //                         ),)
+    //                         ),   
+    //                       GridView.builder(
+    //           shrinkWrap: true,
+    //           physics: NeverScrollableScrollPhysics(),
+    //           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    //             crossAxisCount: 2, // Number of columns in the grid
+    //             crossAxisSpacing: 10.0,
+    //             mainAxisSpacing: 10.0,
+    //             childAspectRatio: 3 / 1.5,
+    //           ),
+    //           itemCount: question['options'].length,
+    //           itemBuilder: (context, optionIndex) {
+    //             var option = question['options'][optionIndex];
+    //             var status = question['options'][optionIndex]['status'];
+    //             bool isSelected = selectedIndex == optionIndex;
+    //             return GestureDetector(
+    //               onTap: () {
+    //                 setState(() {
+    //                   selectedIndex = optionIndex;
+    //                   selectedOption = status;
+    //                   print(selectedOption);
+    //                 });
+    //               },
+    //               child: Stack(
+    //                 children: [
+    //                   Container(
+    //                     // width: MediaQuery.of(context).size.width * 0.99,
+    //                     // height: MediaQuery.of(context).size.height * 0.05,
+    //                     decoration: BoxDecoration(
+    //                       image: DecorationImage(
+    //                         fit: BoxFit.cover,
+    //                         image: AssetImage("assets/images/ans.png"),
+    //                       ),
+    //                     ),
+    //                     child: Center(
+    //                       child: Text(
+    //                         option['title'].toString(),
+    //                         style: TextStyle(color: Colors.black),
+    //                       ),
+    //                     ),
+    //                   ),
+    //                   if (isSelected)
+    //                     Positioned(
+    //                       top: 8,
+    //                       right: 8,
+    //                       child: Icon(
+    //                         Icons.check_circle,
+    //                         color: Colors.green,
+    //                       ),
+    //                     ),
+    //                 ],
+    //               ),
+    //             );
+    //           },
+    //                     ),
+    //                         SizedBox(height: MediaQuery.of(context).size.height*0.015,),
+                            
+    //                         // ...question['options'].map<Widget>((option) {
+    //                         //   return Text(
+    //                         //     option['title'].toString(),
+    //                         //     style: TextStyle(color: Colors.black),
+    //                         //   );
+    //                         // }).toList(),
+    //                       ],
+    //                     ),
+    //                 ],
+    //               );
+    //             },
+    //           );
+    //                     }
+    //                   },
+    //                 ),
+    //               )
+    //             ],
+    //           ),
+    //         ),
+    //         Container(
+    //                         width: MediaQuery.of(context).size.width*1,
+    //                         height: MediaQuery.of(context).size.height*0.1,
+    //                         decoration: BoxDecoration(
+    //                           image: DecorationImage(
+    //                             fit: BoxFit.fitHeight,
+    //                             image: AssetImage("assets/images/button.png"))),
+    //                         child:InkWell(
+    //                           onTap: (){
 
-//                               Ansstatus=true;
-// print(Ansstatus);     
-                                
-//                                    });
-//                                 //  });
-//                                   // if
-//                                   // alerdialogans(context, "Congratulations!", 'That\'s the correct answer.');
-//                                  }
-//                                   print(answer.options[index]['status']);
-                               
-//                                 },
-//                                   child:
-//                                   Container(
-//                                     padding: EdgeInsets.all(2),
-//                                     // margin: EdgeInsets.all(10),
-//                                   // width: MediaQuery.of(context).size.width*0.8,
-//                                   // height: MediaQuery.of(context).size.height*0.3,
-//                                                       decoration: BoxDecoration(
-                                                              
-//                                         image: DecorationImage(
-//                                           fit: BoxFit.contain,
-//                                                     image: AssetImage("assets/images/ans.png")),
-//                                  ),
-//                                   child:Center(child:
-//                                   Text('${answer.options[index]['title'].toString()}',style: TextStyle(
-//                                     color: selectedIdx==index?Colors.green:Colors.black, 
-//                                     fontWeight: selectedIdx==index?FontWeight.bold:FontWeight.normal,
-//                                     fontSize: selectedIdx==index?20:16),
-//                                   ))
-//                                   ),
-//                                 );
-                              
-//                                     }),
-//                               ),
-//                               InkWell(
-//                                 onTap: (){
-//                                   if(Ansstatus==false){
-//                                   // if
-//                                   alerdialogans(context, "Wrong Answer!", 'Oops! That was incorrect. Please try again.');
-//                                  }                                 
-//                                  else if(Ansstatus==true){
-//                                   // if
-//                                   alerdialogans(context, "Congratulations!", 'That\'s the correct answer.');
-//                                  }
-//                                 },
-//                                 child: Container(
-//                                       padding: EdgeInsets.all(5),
-//                                       // margin: EdgeInsets.all(10),
-//                                     width: MediaQuery.of(context).size.width*0.9,
-//                                     height: MediaQuery.of(context).size.height*0.1,
-//                                                         decoration: BoxDecoration(
-                                                                
-//                                           image: DecorationImage(
-//                                             fit: BoxFit.fitWidth,
-//                                                       image: AssetImage("assets/images/button.png")),
-//                                    ),
-//                                     child:Center(child:
-//                                     Text("submit",style:TextStyle(color: Colors.white,fontSize: 25)
-//                                     ))
-//                                     ),
-//                               ),
-                      
-                                                        
-                      
-                      
-//                           ],
-//                         );
-//                                     }),
-//                       ),
-//                     );
-//                   }  
-
-
-
-
-
-//                   return SizedBox(
-//                     height: MediaQuery.of(context).size.height*0.55,
-//                     width: MediaQuery.of(context).size.width,
-//                     child: Column(
-//                         mainAxisAlignment: MainAxisAlignment.center,
-//                       children: [
-//                         CircularProgressIndicator(),
-                      
-                      
-                      
-//                       ],
-                    
-//                     ),
-//                   );
-//                 },
-//                       ),
-
-
-
-
-          // FutureBuilder<List<quizhomemodel>>(
-          //       future: fetchData(),
-          //       builder: (context, snapshot) {
-          //         if (snapshot.hasData) {
-          //           return 
-          //           Expanded(
-          //             child: Container(
-          //                              height:400,
-          //               margin:  EdgeInsets.only(left: 5,right: 5),
-          //               padding: EdgeInsets.all(15),
-          //               decoration: BoxDecoration(
-          //                 borderRadius: const BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30)),
-          //                 // image: DecorationImage(
-          //                 //   fit: BoxFit.fitWidth,
-          //                 //   image: AssetImage("assets/bg.jpg"))
-          //                   ),
-          //               child: ListView.builder(
-          //                 shrinkWrap: true,
-          //                 scrollDirection: Axis.vertical,
-          //                 physics: ScrollPhysics(),
-          //                           itemCount: 
-          //                           snapshot.data!.length,
-          //                           itemBuilder: (BuildContext context, int index) {
-          //               // var imageurl=snapshot.data![index].featured_image;
-          //               var linkapi="https://quranarbi.turk.pk/public/public/";
-          //               int sizefontapi=15;
-          //               int borderwidth=0;
-          //               return Column(
-          //                 crossAxisAlignment: CrossAxisAlignment.center,
-          //                 children: [
-          //                   Text(snapshot.data![index].id.toString()),
-          //                     // Text(snapshot.data![index].description.toString()),
-          //                   // Text(
-                        
-          //                   //   snapshot.data![index].title==null?"null":snapshot.data![index].description.toString()
-          //                   // )
-                        
-          //                 ],
-          //               );
-          //                           }),
-          //             ),
-          //           );
-          //         }  
-
-
-
-
-
-          //         return SizedBox(
-          //           height: MediaQuery.of(context).size.height*0.55,
-          //           width: MediaQuery.of(context).size.width,
-          //           child: Column(
-          //               mainAxisAlignment: MainAxisAlignment.center,
-          //             children: [
-          //               CircularProgressIndicator(),
-          //             ],
-                    
-          //           ),
-          //         );
-          //       },
-          //             ),
-                      // Text("",style: TextStyle(fontSize: ),)
+    //                           },
+    //                           child: Center(child:  Text('Next')))
+    //                       ),
+      
           ],
           
         ),
