@@ -10,9 +10,6 @@ import 'package:http/http.dart' as http;
 // import 'package:flutter_html/flutter_html.dart';
 import '../../../../../../function/functions.dart';
 import '../../../../../../model/images_get.dart';
-import '../../../../../../model/quizmodel.dart';
-import '../../../../../../res/player.dart';
-import '../../../../../../res/reusable.dart';
 import '../../../../menubar.dart';
 import '../../../../networkheader.dart';
 
