@@ -118,8 +118,6 @@ Future<void> answer() async {
   }
 }
 
-
-
 void playAudioFromUrl(String url) async {
   var result = await audioPlayer.play() as int;
   if (result == 1) {
@@ -211,7 +209,7 @@ void playAudioFromUrl(String url) async {
                                   return Column(children: [if(snapshot.data![index].id==7)...{
                                Headernetwork(linkapi+imageurl, '', Colors.white, true),
                                   }],); 
-                                  });  
+                                  });
                   }}
                 return SizedBox(
                   height: MediaQuery.of(context).size.height*0.2,
