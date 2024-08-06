@@ -55,7 +55,7 @@ var _progress = 0.0;
     List<LessonIntroDataitems> dataList = jsonData.map((json) => LessonIntroDataitems.fromJson(json)).toList();
 
     // Sort the list in descending order by a specific property (e.g., id)
-    dataList.sort((a, b) => b.id.compareTo(a.id));  // Replace 'id' with the desired property
+    dataList.sort((a, b) => a.id.compareTo(b.id));  // Replace 'id' with the desired property
 
     return dataList;
   } else {
@@ -160,7 +160,6 @@ var notdatafournd=[];
     if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
     if(jsonResponse==null){
-      
       return jsonResponse.map((data) => LessonIntroDataitems.fromJson(data)).toList();
     }
   return 
@@ -182,8 +181,6 @@ int imgwidth=1;
 //       fetchData();
 //       postData();
 //       audioPlayer;
-      
-  
 // }
 AudioPlayer audioPlayer = AudioPlayer();
 
@@ -627,7 +624,7 @@ class _GroupWidgetState extends State<GroupWidget> {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            for (int i = 0; i < widget.items.length; i += 4) ...[
+            // for (int i = 0; i < widget.items.length; i += 4) ...[
               GridView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -636,9 +633,11 @@ class _GroupWidgetState extends State<GroupWidget> {
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 15,
                 ),
-                itemCount: (i + 4 <= widget.items.length) ? 4 : widget.items.length - i,
+                itemCount: widget.items.length,
+                // itemCount: (i + 4 <= widget.items.length) ? 4 : widget.items.length - i,
                 itemBuilder: (context, index) {
-                  final content = widget.items[i + index];
+                  widget.items.sort((a, b) => b.id.compareTo(a.id));
+                  final content = widget.items[index];
                   double? fontSize = double.tryParse(content.font_size ?? "14.0");
                   String? colorCode = content.text_color_code;
                   Color textColor = colorCode != null ? Color(int.parse("0xff" + colorCode)) : Colors.black;
@@ -730,9 +729,9 @@ class _GroupWidgetState extends State<GroupWidget> {
                   );
                 },
               ),
-              if (i + 4 < widget.items.length) Divider(thickness: 1, color: Colors.black),
+              // if (i + 4 < widget.items.length) Divider(thickness: 1, color: Colors.black),
             ],
-          ],
+          // ],
         ),
       ),
     );
