@@ -624,7 +624,6 @@ class _GroupWidgetState extends State<GroupWidget> {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            // for (int i = 0; i < widget.items.length; i += 4) ...[
               GridView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -634,7 +633,6 @@ class _GroupWidgetState extends State<GroupWidget> {
                   mainAxisSpacing: 15,
                 ),
                 itemCount: widget.items.length,
-                // itemCount: (i + 4 <= widget.items.length) ? 4 : widget.items.length - i,
                 itemBuilder: (context, index) {
                   widget.items.sort((a, b) => b.id.compareTo(a.id));
                   final content = widget.items[index];

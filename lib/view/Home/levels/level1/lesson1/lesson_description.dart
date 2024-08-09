@@ -22,7 +22,6 @@ import '../../../../../res/video.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:video_player/video_player.dart';
 import 'package:http/http.dart' as http;
-// import 'package:flutter_html/flutter_html.dart';
 
 import '../../../menubar.dart';
 import '../../../networkheader.dart';
@@ -126,8 +125,6 @@ var notdatafournd=[];
     // Request failed
     print('Post request failed with status: ${response.statusCode}');
   }
-    // var url =Uri.parse("https://quranarbi.turk.pk/api/contents");
-    // final response = await http.get(url);
     if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
     if(jsonResponse==null){
