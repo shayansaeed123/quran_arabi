@@ -173,36 +173,7 @@ int imgwidth=1;
                            
                               ],),
                           },
-                          // if(snapshot.data![index].id==18)...{
-                          //   Container(
-                          //   width: MediaQuery.of(context).size.width*0.45,
-                          //   child: InkWell(
-                          //     onTap: (){
-                          //       Navigator.push(context, MaterialPageRoute(builder: (context)=>LessonsDescription(
-                          //         sub_category_id: snapshot.data![index].id.toString(),
-                          //         lesson_id:lesson_id,
-                          //         )));
-                          //     },child: Image.network("${linkapi+imageurl}")),
-                          // ),
-                          // InkWell(
-                          //   onTap: (){
-                          //      Navigator.push(context, MaterialPageRoute(builder: (context)=>QuizHomePage()));
-                          //   },
-                          //   child: Container(
-                          //   width: MediaQuery.of(context).size.width*0.99,
-                          //   height: MediaQuery.of(context).size.height*0.147,
-                          //   decoration: BoxDecoration(
-                              
-                          //     image: DecorationImage(
-                          //       fit: BoxFit.fitHeight,
-                          //       image: AssetImage("assets/images/question.png"))),
-                          //   child:Center(child:Text("امتحان",style: TextStyle(fontSize: 30),))
-                          // ),),
-                          // متحان
-                                // Navigator.push(context, MaterialPageRoute(builder: (context)=>QuizHomePage()));
-                            
-                          // } ,
-                        
+                      
                             
                         ],
                       );
