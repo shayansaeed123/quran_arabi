@@ -138,16 +138,7 @@ var notdatafournd=[];
     throw Exception('Unexpected error occured!');
   }
 }
-// Future<List<LessonData>> fetchData() async {
-//     var url =Uri.parse("https://quranarbi.turk.pk/api/categories");
-//     final response = await http.get(url);
-//     if (response.statusCode == 200) {
-//     List jsonResponse = json.decode(response.body);
-//     return jsonResponse.map((data) => LessonData.fromJson(data)).toList();
-//   } else {
-//     throw Exception('Unexpected error occured!');
-//   }
-// }
+
 
 int imgwidth=1;
 
