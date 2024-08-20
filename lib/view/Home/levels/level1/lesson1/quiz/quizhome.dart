@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:quran_arabi/view/Home/levels/level1/lesson1/audiowidgets.dart';
 // import 'package:qurani_arabi_flutter/view/Home/menubar.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:http/http.dart' as http;
@@ -49,7 +50,7 @@ int selectedIdx = -1;
 
 
 Future<void> fetchDataQuestion() async {
-  print('gfjgdfg');
+
     var url = 'https://quranarbi.turk.pk/api/question';
     var body = {
       'lesson_id': lesson_id, // Ensure lesson_id is defined
@@ -250,11 +251,12 @@ void playAudioFromUrl(String url) async {
                                 onTap: () {
                                   // Your next button action
                                 },
-                                child: Center(child: Text('Next')),
+                                child: Center(child: Text('Next',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
                               ),
                             );
                           }
                           var question = alldata[index];
+                          var linkapi = "https://quranarbi.turk.pk/public/";
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -271,18 +273,55 @@ void playAudioFromUrl(String url) async {
                                     height:
                                         MediaQuery.of(context).size.height * 0.15,
                                     decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage(
-                                            "assets/images/question.png"),
-                                      ),
+                                      borderRadius: BorderRadius.circular(11),
+                                      border: Border.all(color: Color(0XFF114b5c),width: 1.8)
+                                      // image: DecorationImage(
+                                      //   fit: BoxFit.cover,
+                                      //   image: AssetImage(
+                                      //       "assets/images/question.png"),
+                                      // ),
                                     ),
-                                    child: Center(
-                                      child: Text(
-                                        question['title'].toString(),
-                                        style: TextStyle(color: Colors.black),
-                                      ),
-                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                      if(question['type_id']=='6')...{
+                                        Expanded(child: Center(
+                                          child: Text(
+                                                                                question['title'].toString(),
+                                                                                style: TextStyle(color: Colors.black),
+                                                                              ),
+                                        ))
+                                      }else if(question['type_id']=='3')...{
+                                        Expanded(child: AudioPlayerWidget(
+                                            audioUrl: linkapi + question['audio_question'],
+                                          ),)
+                                    //     IconButton(
+                                    //                             icon: Icon(Icons.volume_up),
+                                    //                             onPressed: () {
+                                    //                               showDialog(
+                                    //                                 context: context,
+                                    //                                 builder: (BuildContext context) {
+                                    //                                   return AlertDialog(
+                                    //                                     content: SingleChildScrollView(
+                                    // child: ListBody(
+                                    //   children: <Widget>[
+                                    //     Center(
+                                    //       child: AudioPlayerWidget(
+                                    //         audioUrl: linkapi + question['audio_question'],
+                                    //       ),
+                                    //     ),
+                                    //   ],
+                                    // ),
+                                    //                                     ),
+                                    //                                   );
+                                    //                                 },
+                                    //                               );
+                                    //                             },
+                                    //                           )
+                                      }else if(question['type_id']=='2')...{
+                                        Expanded(child: Image.network(linkapi + question['image_question']),)
+                                      }
+                                    ],),
                                   ),
                                   GridView.builder(
                                     shrinkWrap: true,
@@ -321,34 +360,40 @@ void playAudioFromUrl(String url) async {
                                             answer();
                                           });
                                         },
-                                        child: Stack(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image: AssetImage(
-                                                      "assets/images/ans.png"),
+                                        child: 
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 10.0,right: 10.0),
+                                          child: Stack(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  // image: DecorationImage(
+                                                  //   fit: BoxFit.cover,
+                                                  //   image: AssetImage(
+                                                  //       "assets/images/ans.png"),
+                                                  // ),
+                                                  borderRadius: BorderRadius.circular(11),
+                                                                                border: Border.all(color: Color(0XFF114b5c),width: 1.5,)
+                                                ),
+                                                child: Center(
+                                                  child: Text(
+                                                    option['title'].toString(),
+                                                    style: TextStyle(
+                                                        color: Colors.black),
+                                                  ),
                                                 ),
                                               ),
-                                              child: Center(
-                                                child: Text(
-                                                  option['title'].toString(),
-                                                  style: TextStyle(
-                                                      color: Colors.black),
+                                              if (isSelected)
+                                                Positioned(
+                                                  top: 8,
+                                                  right: 8,
+                                                  child: Icon(
+                                                    Icons.check_circle,
+                                                    color: Colors.green,
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                            if (isSelected)
-                                              Positioned(
-                                                top: 8,
-                                                right: 8,
-                                                child: Icon(
-                                                  Icons.check_circle,
-                                                  color: Colors.green,
-                                                ),
-                                              ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       );
                                     },

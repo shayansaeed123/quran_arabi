@@ -11,8 +11,8 @@ import 'view/register/login/login.dart';
 // import 'package:qurani_arabi_flutter/view/register/login/login.dart';
 AudioPlayer? player;
 Future<void> main() async {
-  //  WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   player = AudioPlayer();
   runApp(MyApp());
 }
@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       title: 'Qurani Arabi',
       debugShowCheckedModeBanner: false,
-      home: Home(),
-      // home: SignInScreen(),
+      // home: Home(),
+      home: SignInScreen(),
     );
   }
 }

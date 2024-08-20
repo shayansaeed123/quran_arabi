@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:quran_arabi/database/mysharedpreferece.dart';
 import '../../function/functions.dart';
 import '../../model/images_get.dart';
 import '../../model/lesson_data.dart';
@@ -30,6 +31,12 @@ class _HomeState extends State<Home> {
 //     throw Exception('Unexpected error occured!');
 //   }
 // }
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print('dfsd ${MySharedPrefrence().get_userID()}');
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -216,13 +216,13 @@ void set_user_ID(String? userID) {
     return ''.val('remarks', getBox: preferences).val;
   }
 
-  void set_job(int? job_closed) {
-    0.val('job_closed', getBox: preferences).val =
-        job_closed ?? 0;
+  void set_userID(int? userID) {
+    0.val('userID', getBox: preferences).val =
+        userID ?? 0;
   }
 
-  int get_job() {
-    return 0.val('job_closed', getBox: preferences).val;
+  int get_userID() {
+    return 0.val('userID', getBox: preferences).val;
   }
 
   void set_tutor_id(String? tutor_id) {
