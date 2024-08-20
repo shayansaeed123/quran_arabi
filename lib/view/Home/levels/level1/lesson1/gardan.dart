@@ -391,62 +391,7 @@ void playAudioFromUrl(String url) async {
     //   ),
     // ),
                                   
-    //                           //   Html(
-    //                           // data: """
-    //                           //   <div style="text-align: center;">
-    //                           // ${snapshot.data![index].description.toString()}
-    //                           //   </div>
-    //                           // """,
-    //                           // style:{"body":Style(
-    //                           //   fontFamily: "Alvi",
-    //                           //   color: Color(int.parse("0xff"+"${snapshot.data![index].text_color_code.toString()}")),  
-    //                           // // fontSize: FontSize(snapshot.data![index].font_size.toDouble())
-    //                           // )}
-    //                           // ),
-    //                           // Text(snapshot.data![index].description.toString())
-                             
-    //                             }   }
-                        
-                        
-                        
-                        
-                        
-    //                     else if(snapshot.data![index].type_id=="3")...{
-                          
-    //                       if(snapshot.data![index].audiourl==null||snapshot.data![index].audiourl=="")...{                          
-    //                      reusablebordercontainer(context, 0.90, 0.88, 5, reusableocontaineraudio(context, 0.88, 
-    //                            "Audio Link Missing", (){
-    //                             }))
-                          
-    //                       }
-    //                        else if(snapshot.data![index].audiourl!=null||snapshot.data![index].audiourl!="")...{                          
-                          
-    //                           reusablebordercontainer(context, 0.90, 0.88, 5, reusableocontaineraudio(context, 0.88, 
-    //                           "",(){
-                         
-    //                             PlayAudio("https://quranarbi.turk.pk/public/public/"+"${snapshot.data![index].audiourl}",context);})) }}
-                          
-    //                       ],
-    //                     );
-    //                                 }),
-    //                   ),
-    //                 );
-    //               }  
 
-    //               return SizedBox(
-    //                 height: MediaQuery.of(context).size.height*0.55,
-    //                 width: MediaQuery.of(context).size.width,
-    //                 child: Column(
-    //                     mainAxisAlignment: MainAxisAlignment.center,
-    //                   children: [
-    //                     CircularProgressIndicator(),
-    //                   ],
-                    
-    //                 ),
-    //               );
-                // },
-                //       ),
-                      // Text("",style: TextStyle(fontSize: ),)
         
 
 
