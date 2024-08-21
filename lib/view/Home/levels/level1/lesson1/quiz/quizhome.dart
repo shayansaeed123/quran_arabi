@@ -32,6 +32,7 @@ class _QuizHomePageState extends State<QuizHomePage> {
    List<int?> selectedIndices = [];
   List<String?> selectedOptions = [];
   List<dynamic> alldata = [];
+  List<Map<String, String?>> selectedData = [];
   bool isLoading = true;
   String Qstatus = '';
   String questionId = '';
@@ -72,7 +73,7 @@ Future<void> fetchDataQuestion() async {
         setState(() {
           alldata = json.decode(response.body);
           selectedIndices = List<int?>.filled(alldata.length, null);
-          selectedOptions = List<String?>.filled(alldata.length, null);
+          // selectedOptions = List<String?>.filled(alldata.length, null);
           isLoading = false;
         });
       } else {
@@ -91,12 +92,13 @@ Future<void> fetchDataQuestion() async {
 
 
 Future<void> answer() async {
-  var url = 'https://quranarbi.turk.pk/api/userAnswer';  
+  var url = 'https://quranarbi.turk.pk/api/userQuestionsAnswers';  
   print('lessen id $lesson_id');
+  print('questions array $selectedData');
   var body = {
-    'user_id': '6',
-    'question_id': questionId.toString(),
-    'status': Qstatus.toString(),
+    'user_id': '9',
+    'lesson_id': lesson_id.toString(),
+    'questions': selectedData,
   };
   var headers = {
     'Content-Type': 'application/json',
@@ -113,6 +115,12 @@ Future<void> answer() async {
   }
     if (response.statusCode == 200) {
     var jsonResponse = json.decode(response.body);
+    if (jsonResponse['error']==0) {
+      Navigator.pop(context);
+      alerdialogans(context, 'Message', 'You are not allowed to attempt more than 3 times');
+    }else{
+      Navigator.pop(context);
+    }
     print(jsonResponse);
   } else {
     throw Exception('Unexpected error occured!');
@@ -148,6 +156,29 @@ void playAudioFromUrl(String url) async {
       },
     );
 }
+
+void handleSelection(int questionIndex, int optionIndex, String optionText) {
+    setState(() {
+      String question = alldata[questionIndex]['id'].toString(); // Get the question ID
+      selectedIndices[questionIndex] = optionIndex; // Update selected index
+
+      // Check if the questionId already exists in the selectedData list
+      bool found = false;
+      for (var data in selectedData) {
+        if (data['question_id'] == question) {
+          data['status'] = optionText; // Update the selected text for the questionId
+          found = true;
+          break;
+        }
+      }
+
+      if (!found) {
+        // If the questionId is not found, add a new map entry to selectedData
+        selectedData.add({'question_id': question, 'status': optionText});
+      }
+      print('Selected data list: $selectedData');
+    });
+  }
 
 // single work 
 // bool selected=false;
@@ -250,8 +281,11 @@ void playAudioFromUrl(String url) async {
                               child: InkWell(
                                 onTap: () {
                                   // Your next button action
+                                  setState(() {
+                                    answer();
+                                  });
                                 },
-                                child: Center(child: Text('Next',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+                                child: Center(child: Text('Submit',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
                               ),
                             );
                           }
@@ -350,14 +384,16 @@ void playAudioFromUrl(String url) async {
                                         onTap: () {
                                           setState(() {
                                             selectedIndices[index] = optionIndex;
-                                            questionId = question_id;
-                                            Qstatus = status;
-                                            selectedOptions[index] = status;
-                                            print('status $Qstatus');
-                                            print('Question Id $questionId');
-                                            print(selectedOptions);
-                                           setState(() {});
-                                            answer();
+                                          //   questionId = question_id;
+                                          //   Qstatus = status;
+                                          //   selectedOptions[index] = status;
+                                          //   print('status $Qstatus');
+                                          //   print('Question Id $questionId');
+                                          //   print(selectedOptions);
+                                          //  setState(() {});
+                                          //   answer();
+                                          handleSelection(index, optionIndex,
+                                            option['status']);
                                           });
                                         },
                                         child: 
