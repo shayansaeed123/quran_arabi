@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:convert';
 
@@ -9,6 +8,7 @@ import 'package:quran_arabi/view/Home/levels/level1/lesson1/audiowidgets.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:http/http.dart' as http;
 // import 'package:flutter_html/flutter_html.dart';
+import '../../../../../../database/mysharedpreferece.dart';
 import '../../../../../../function/functions.dart';
 import '../../../../../../model/images_get.dart';
 import '../../../../menubar.dart';
@@ -96,7 +96,7 @@ Future<void> answer() async {
   print('lessen id $lesson_id');
   print('questions array $selectedData');
   var body = {
-    'user_id': '9',
+    'user_id': MySharedPrefrence().get_user_ID(),
     'lesson_id': lesson_id.toString(),
     'questions': selectedData,
   };
@@ -120,6 +120,7 @@ Future<void> answer() async {
       alerdialogans(context, 'Message', 'You are not allowed to attempt more than 3 times');
     }else{
       Navigator.pop(context);
+      alerdialogans(context, 'Message', 'Submited');
     }
     print(jsonResponse);
   } else {

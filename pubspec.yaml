@@ -79,6 +79,7 @@ dev_dependencies:
   firebase_auth:
   get_storage: ^2.1.1
   firebase_core:
+  change_app_package_name:
 
 
 flutter_icons:

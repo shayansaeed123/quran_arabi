@@ -1,6 +1,7 @@
 import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+// import 'package:libcalendar/libcalendar.dart';
 
 class Headernetwork extends StatefulWidget {
   var bg_img;
@@ -155,6 +156,42 @@ String day() {
   // DateTime date = new DateTime(now.year, now.month, now.day);
   return DateFormat('EEEE').format(internetTime).toString();
 }
+
+// String islamic_date() {
+//   var arr = [
+//     'Muharram',
+//     'Safar',
+//     'Rabi al-Awwal',
+//     'Rabi al-Thani',
+//     'Jumada al-Awwal',
+//     'Jumada al-Thani',
+//     'Rajab',
+//     'Shabaan',
+//     'Ramadan',
+//     'Shawwal',
+//     'Dhu al-Qadah',
+//     'Dhu al-Hijjah'
+//   ];
+
+  // DateTime internetTime = DateTime.now();
+  // // DateTime date = new DateTime(now.year, now.month, now.day);
+  // DateTime islamic = fromGregorianToIslamic(
+  //     internetTime.year, internetTime.month, internetTime.day);
+
+  // String date =
+  //     arr[islamic.month - 1].toString() + ', ' + islamic.year.toString();
+
+  // return date;
+// } 
+
+// String islamic_day() {
+//   DateTime internetTime = DateTime.now();
+//   // DateTime date = new DateTime(now.year, now.month, now.day);
+//   DateTime islamic = fromGregorianToIslamic(
+//       internetTime.year, internetTime.month, internetTime.day);
+
+//   return islamic.day.toString();
+// }
 
 String current_namaz_name() {
   final myCoordinates = Coordinates(24.8607, 67.0011);

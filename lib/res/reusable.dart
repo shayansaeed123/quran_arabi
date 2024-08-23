@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
 
-Widget reusablebordercontainer(BuildContext context, double width, double height, double borderWidth, Widget child) {
+Widget reusablebordercontainer(BuildContext context, double width, double height, double borderWidth, Widget child,) {
   return Container(
     decoration: BoxDecoration(
-      border: Border.all(width: borderWidth),
+      border: Border.all(width: borderWidth,color:  Color.fromARGB(255, 2, 129, 148)),
       borderRadius: BorderRadius.circular(10),
     ),
+    margin: EdgeInsets.all(6),
     child: Padding(
       padding: const EdgeInsets.all(8.0),
       child: child,
     ),
   );
 }
+
 
 // Container reusablebordercontainer(BuildContext context, double borderwidth,double width, double circleraduis,Widget widget){
 //   return

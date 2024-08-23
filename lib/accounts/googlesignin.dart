@@ -20,8 +20,7 @@ class _SignInScreenState extends State<SignInScreen> {
   var url = 'https://quranarbi.turk.pk/api/verifyAppUser';
   
   var body = {
-    // 'email': MySharedPrefrence().get_user_email,
-    'email': 'shayan@gmail.com',
+    'email': MySharedPrefrence().get_user_email,
     'verified': '1',
   };
   
@@ -38,15 +37,18 @@ class _SignInScreenState extends State<SignInScreen> {
   if (response.statusCode == 200) {
  
     print('Post request successful!');
+   final Map<String, dynamic> data = json.decode(response.body);
+
+   MySharedPrefrence().set_user_ID(data['user_id']);
+   print(MySharedPrefrence().get_user_ID());
+
+   
     print("Id no");
     print(body);
-        print(response.body);
-    var data = jsonDecode(response.body.toString());
-    MySharedPrefrence().set_userID(data['user_id']);
-    print(MySharedPrefrence().get_userID());
        Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
-    
 
+    
+    print(response.body);
     
   } else {
      _showAlertDialog(context);
@@ -94,46 +96,46 @@ void _showAlertDialog(BuildContext context) {
   //   }
   // }
 
-  // signInWithGoogle() async {
-  //   setState(() {
-  //     isLoading = true;
-  //   });
-  //   try {
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //     GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-  //     GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-  //     AuthCredential credential = GoogleAuthProvider.credential(
-  //       accessToken: googleAuth?.accessToken,
-  //       // idToken: googleAuth?.idToken,
-  //     );
-  //     UserCredential userCredential =
-  //         await FirebaseAuth.instance.signInWithCredential(credential);
-  //     final User? user = userCredential.user;
-  //     if (user != null) {
-  //       final String? email = user.email;
+  signInWithGoogle() async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      setState(() {
+        isLoading = false;
+      });
+      GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        // idToken: googleAuth?.idToken,
+      );
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      final User? user = userCredential.user;
+      if (user != null) {
+        final String? email = user.email;
       
-  //       print('User email: $email');
-  //       // You can now use the email variable
-  //     }
-  //     MySharedPrefrence().set_user_name(user!.displayName);
-  //     // MySharedPrefrence().setUserLoginStatus(true);
-  //     MySharedPrefrence().set_user_email(user.email);
-  //     print(MySharedPrefrence().get_user_name());
-  //     // print(MySharedPrefrence().getUserLoginStatus());
-  //     print(MySharedPrefrence().get_user_email());
-  //         Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
-  //       postData();
-  //   } catch (e) {
-  //     print('Error $e');
+        print('User email: $email');
+        // You can now use the email variable
+      }
+      MySharedPrefrence().set_user_name(user!.displayName);
+      // MySharedPrefrence().setUserLoginStatus(true);
+      MySharedPrefrence().set_user_email(user.email);
+      print(MySharedPrefrence().get_user_name());
+      // print(MySharedPrefrence().getUserLoginStatus());
+      print(MySharedPrefrence().get_user_email());
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
+        postData();
+    } catch (e) {
+      print('Error $e');
 
-  //   } finally {
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //   }
-  // }
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
 
 
    @override
@@ -174,8 +176,7 @@ void _showAlertDialog(BuildContext context) {
                   ),
                   label: Text('Sign in with Google'),
                   onPressed: () {
-                  // signInWithGoogle();
-                  postData();
+                  signInWithGoogle();
                     },
                 ),
               ],

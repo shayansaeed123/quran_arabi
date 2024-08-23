@@ -91,6 +91,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
               },
             ),
           ),
+          // Icon(Icons.volume_up),
         ],
       ),
     );

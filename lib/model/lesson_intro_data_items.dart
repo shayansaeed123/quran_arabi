@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 class LessonIntroDataitems{
-  final int id;
+  final int? id;
   final String type_id;
   final String featured_image; 
   final String description;

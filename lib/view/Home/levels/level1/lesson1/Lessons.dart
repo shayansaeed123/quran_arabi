@@ -128,7 +128,33 @@ int imgwidth=1;
                               },
                               child: Image.network("${linkapi+imageurl}")),
                           ),},
-                          if(snapshot.data![index].id==14 ||snapshot.data![index].id==16 )...{
+                          if(snapshot.data![index].id==16 )...{
+                              Row(  
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                SizedBox(
+                            width: MediaQuery.of(context).size.width*0.45,
+                            child: InkWell(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>LessonsDescription(
+                              lesson_id:lesson_id,
+                              sub_category_id: snapshot.data![index].id.toString(),)));
+                          },child: Image.network("${linkapi+"${snapshot.data![index].featured_image}"}"))),
+                          //gardan
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width*0.45,
+                            child: InkWell(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>LessonsDescription(
+                              lesson_id:lesson_id,
+                              sub_category_id: snapshot.data![index+1].id.toString(),)));
+                          },child: Image.network("${linkapi+"${snapshot.data![index+1].featured_image}"}")))
+                           
+                              ],),
+                          },   
+
+//gardan
+     if(snapshot.data![index].id==14 )...{
                               Row(  
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
@@ -151,7 +177,13 @@ int imgwidth=1;
                           },child: Image.network("${linkapi+"${snapshot.data![index+1].featured_image}"}")))
                            
                               ],),
-                          },                          
+                          }, 
+
+
+
+
+
+
                           if(snapshot.data![index].id==18  )...{
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -173,7 +205,36 @@ int imgwidth=1;
                            
                               ],),
                           },
-                      
+                          // if(snapshot.data![index].id==18)...{
+                          //   Container(
+                          //   width: MediaQuery.of(context).size.width*0.45,
+                          //   child: InkWell(
+                          //     onTap: (){
+                          //       Navigator.push(context, MaterialPageRoute(builder: (context)=>LessonsDescription(
+                          //         sub_category_id: snapshot.data![index].id.toString(),
+                          //         lesson_id:lesson_id,
+                          //         )));
+                          //     },child: Image.network("${linkapi+imageurl}")),
+                          // ),
+                          // InkWell(
+                          //   onTap: (){
+                          //      Navigator.push(context, MaterialPageRoute(builder: (context)=>QuizHomePage()));
+                          //   },
+                          //   child: Container(
+                          //   width: MediaQuery.of(context).size.width*0.99,
+                          //   height: MediaQuery.of(context).size.height*0.147,
+                          //   decoration: BoxDecoration(
+                              
+                          //     image: DecorationImage(
+                          //       fit: BoxFit.fitHeight,
+                          //       image: AssetImage("assets/images/question.png"))),
+                          //   child:Center(child:Text("امتحان",style: TextStyle(fontSize: 30),))
+                          // ),),
+                          // متحان
+                                // Navigator.push(context, MaterialPageRoute(builder: (context)=>QuizHomePage()));
+                            
+                          // } ,
+                        
                             
                         ],
                       );

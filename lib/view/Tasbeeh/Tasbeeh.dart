@@ -13,11 +13,15 @@ class Tasbeeh extends StatefulWidget {
   Tasbeeh({required this.imagepath});
   var imagepath;
   @override
-  State<Tasbeeh> createState() => _TasbeehState(imagepath:imagepath);
+  State<Tasbeeh> createState() => _TasbeehState(
+    imagepath:imagepath
+    );
 }
 
 class _TasbeehState extends State<Tasbeeh> {
-  _TasbeehState({required this.imagepath});
+  _TasbeehState({
+    required this.imagepath
+    });
   var imagepath;
   var count = 0;
 

@@ -23,7 +23,7 @@ class TopMenu extends StatelessWidget {
         children: [
           IconButton(
             icon:
-            Image.asset(home?"assets/icon/Home-Fill.png":"assets/icon/Home.png"), 
+            Image.asset(home?"assets/icon/Home-Fill.png":"assets/icon/Home.png"),
             // Icon(
             //   Icons.home_outlined,
             //   color: home ? Colors.cyan : Color(0xff9e9e9e),
@@ -58,8 +58,6 @@ class TopMenu extends StatelessWidget {
           IconButton(
             icon: 
             Image.asset(quran?"assets/icon/Quran-Fill.png":"assets/icon/Quran.png"), 
-
-           
             onPressed: () {
               if (!quran) {
                 Navigator.push(
@@ -72,11 +70,7 @@ class TopMenu extends StatelessWidget {
             },
           ),
           IconButton(
-            icon: 
-                       Image.asset(hadith?"assets/icon/Hadees-fill.png":"assets/icon/Hadees.png"), 
- 
-
-            
+            icon: Image.asset(hadith?"assets/icon/Hadees-fill.png":"assets/icon/Hadees.png"), 
             onPressed: () {
               if (!hadith) {
                 // Navigator.push(
@@ -88,13 +82,26 @@ class TopMenu extends StatelessWidget {
               }
             },
           ),
+          // IconButton(
+          //   icon: 
+          //    Image.asset(tasbeeh?"assets/icon/Tasbeeh-Fill.png":"assets/icon/Tasbeeh.png"),
+          //   onPressed: () {
+          //     if (!tasbeeh) {
+          //       Navigator.push(
+          //           context,
+          //           MaterialPageRoute(
+          //             builder: (context) => Tasbeeh(),
+          //           ),
+          //       );
+          //     }
+          //   },
+          // ),
           SizedBox(
             height: MediaQuery.of(context).size.height*0.6,
             width: MediaQuery.of(context).size.width*0.18,
             child: FutureBuilder<List<imageget>>(
               future: imagedata(),
               builder: (context, snapshot) {
-                
                 if (snapshot.hasData) {
                   if(snapshot.connectionState==ConnectionState.done){
                     return  ListView.builder(
@@ -109,18 +116,13 @@ class TopMenu extends StatelessWidget {
                                   return Column(children: [if(snapshot.data![index].id==5)...{
                                IconButton(
                                 iconSize: 1,
-              icon:
-                   Image.asset(tasbeeh?"assets/icon/Tasbeeh-Fill.png":"assets/icon/Tasbeeh.png"), 
-            
-             
+                                 icon:
+                   Image.asset(tasbeeh?"assets/icon/Tasbeeh-Fill.png":"assets/icon/Tasbeeh.png"),
               onPressed: () {
-                // Perform search
                 if (!tasbeeh) {
                   Navigator.push(
-              
                     context,
                     MaterialPageRoute(
-                
                       builder: (context) => Tasbeeh(imagepath:linkapi+imageurl),
                     ),
                   );
@@ -133,7 +135,7 @@ class TopMenu extends StatelessWidget {
                   }}
                 return      Container(
                   margin: EdgeInsets.only(left:10,right: 10,top: 10,bottom: 13.5),
-                  height: MediaQuery.of(context).size.height*0.06,
+                  height: MediaQuery.of(context).size.height*0.03,
                   width: MediaQuery.of(context).size.height*0.2,
                   child: Image.asset(tasbeeh?"assets/icon/Tasbeeh-Fill.png":"assets/icon/Tasbeeh.png"));
               },
