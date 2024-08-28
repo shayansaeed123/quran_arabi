@@ -20,7 +20,7 @@ class _SignInScreenState extends State<SignInScreen> {
   var url = 'https://quranarbi.turk.pk/api/verifyAppUser';
   
   var body = {
-    'email': MySharedPrefrence().get_user_email,
+    'email': MySharedPrefrence().get_user_email(),
     'verified': '1',
   };
   
@@ -30,8 +30,8 @@ class _SignInScreenState extends State<SignInScreen> {
 
   var response = await http.post(
     Uri.parse(url),
-    headers: headers,
-    body: jsonEncode(body),
+    // headers: headers,
+    body: body,
   );
 
   if (response.statusCode == 200) {
@@ -111,11 +111,10 @@ void _showAlertDialog(BuildContext context) {
       print(MySharedPrefrence().get_user_name());
       // print(MySharedPrefrence().getUserLoginStatus());
       print(MySharedPrefrence().get_user_email());
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
         postData();
     } catch (e) {
       print('Error $e');
-
     } finally {
       setState(() {
         isLoading = false;
