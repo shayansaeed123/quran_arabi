@@ -82,20 +82,6 @@ void _showAlertDialog(BuildContext context) {
     );
   }
 
-  // final GoogleSignIn _googleSignIn = GoogleSignIn();
-
-  // Future<void> _signInWithGoogle() async {
-  //   final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-  //   if (googleUser != null) {
-  //     final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-  //     final AuthCredential credential = GoogleAuthProvider.credential(
-  //       accessToken: googleAuth.accessToken,
-  //       idToken: googleAuth.idToken,
-  //     );
-  //     await _auth.signInWithCredential(credential);
-  //   }
-  // }
-
   signInWithGoogle() async {
     setState(() {
       isLoading = true;
