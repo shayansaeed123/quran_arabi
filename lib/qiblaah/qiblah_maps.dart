@@ -119,16 +119,3 @@
 //     );
 //   }
 
-//   Future<Position?> _checkLocationStatus() async {
-//     final locationStatus = await FlutterQiblah.checkLocationStatus();
-//     if (locationStatus.enabled) {
-//       return await Geolocator.getCurrentPosition();
-//     }
-//     return null;
-//   }
-
-//   void _updateCamera() async {
-//     final controller = await _controller.future;
-//     controller.animateCamera(CameraUpdate.newLatLngZoom(position, 20));
-//   }
-// }
