@@ -97,23 +97,18 @@ Future<List<LessonData>> fetchData() async {
                         image: AssetImage("assets/bg.jpg"))),
                     child: GridView.builder(
                         itemCount: snapshot.data!.length,
-                    
                         gridDelegate: 
-                      
-                        
                         SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisSpacing: 0,
                         mainAxisSpacing: 5, 
                         mainAxisExtent: 80,
                         // childAspectRatio: 6/6,
-                         
                             crossAxisCount: 2),
                         itemBuilder: (context, index) {
                           return InkWell( 
                           onTap: (){
                             Navigator.push(context, 
                             MaterialPageRoute(builder: (context)=>
-                            
                             Lessons(lesson_id:snapshot.data![index].lesson_id.toString()))
                             //  MyWidget()
                             );
@@ -145,10 +140,7 @@ Future<List<LessonData>> fetchData() async {
                 ),
               );    
                 }
-                
-                
               }
-            
               return SizedBox(
                 height: MediaQuery.of(context).size.height*0.55,
                 width: MediaQuery.of(context).size.width,
@@ -161,7 +153,6 @@ Future<List<LessonData>> fetchData() async {
               );
             },
           ), ]
-           
           ),
     ));
   }
