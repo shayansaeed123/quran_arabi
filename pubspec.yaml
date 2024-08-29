@@ -80,6 +80,7 @@ dev_dependencies:
   get_storage: ^2.1.1
   firebase_core:
   change_app_package_name:
+  rename_app: 
 
 
 flutter_icons:
