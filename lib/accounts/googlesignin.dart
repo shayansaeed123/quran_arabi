@@ -111,7 +111,7 @@ void _showAlertDialog(BuildContext context) {
       print(MySharedPrefrence().get_user_name());
       // print(MySharedPrefrence().getUserLoginStatus());
       print(MySharedPrefrence().get_user_email());
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> WillPopScope(child: Home(), onWillPop: () async => false)));
         postData();
     } catch (e) {
       print('Error $e');
