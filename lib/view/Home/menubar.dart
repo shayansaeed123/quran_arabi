@@ -6,18 +6,19 @@ import '../../model/images_get.dart';
 import '../PrayerTimig/PrayerTiming.dart';
 import '../Quran/Quran.dart';
 import '../Tasbeeh/Tasbeeh.dart';
+import '../profile/profilelist.dart';
 
 
 class TopMenu extends StatelessWidget {
-  bool home, namaz_timings, quran, hadith, tasbeeh;
+  bool home, namaz_timings, quran, hadith, tasbeeh,profile;
 
-  TopMenu(this.home, this.namaz_timings, this.quran, this.hadith, this.tasbeeh);
+  TopMenu(this.home, this.namaz_timings, this.quran, this.hadith, this.tasbeeh, this.profile);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height*0.07,
-      width: MediaQuery.of(context).size.width*0.95,
+      width: MediaQuery.of(context).size.width*0.97,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -135,30 +136,28 @@ class TopMenu extends StatelessWidget {
                   }}
                 return      Container(
                   margin: EdgeInsets.only(left:10,right: 10,top: 10,bottom: 13.5),
-                  height: MediaQuery.of(context).size.height*0.03,
-                  width: MediaQuery.of(context).size.height*0.2,
+                  height: MediaQuery.of(context).size.height*0.02,
+                  width: MediaQuery.of(context).size.height*0.1,
                   child: Image.asset(tasbeeh?"assets/icon/Tasbeeh-Fill.png":"assets/icon/Tasbeeh.png"));
               },
             ),
           ),
-          // IconButton(
-          //   icon:
-          //   Image.asset(tasbeeh?"assets/images/tsbhb.png":"assets/images/tsbh.png"), 
 
-        
-          //   onPressed: () {
-          //     // Perform search
-          //     if (!tasbeeh) {
-          //       Navigator.push(
-          //         context,
-          //         MaterialPageRoute(
-              
-          //           builder: (context) => Tasbeeh(),
-          //         ),
-          //       );
-          //     }
-          //   },
-          // ),
+             IconButton(
+            icon: 
+            Image.asset(profile?"assets/images/myprofile.png":"assets/images/myprofile.png"), 
+            onPressed: () {
+              if (!quran) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => myprofile(),
+                  ),
+                );
+              }
+            },
+          ),
+         
         ],
       ),
     );
