@@ -13,6 +13,7 @@ class PrayerTiming extends StatefulWidget {
 }
 
 class _PrayerTimingState extends State<PrayerTiming> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

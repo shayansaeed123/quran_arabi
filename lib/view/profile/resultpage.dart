@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:quran_arabi/database/mysharedpreferece.dart';
 
 class reslut extends StatefulWidget {
    final int lessonId;
@@ -13,6 +14,7 @@ class reslut extends StatefulWidget {
 }
 
 class _reslutState extends State<reslut> {
+
    List<dynamic> _result = [];
 
   @override
@@ -32,7 +34,7 @@ Future<void> fetchResult() async {
       headers: {'Content-Type': 'application/json'}, 
       body: jsonEncode({
         'lesson_id': widget.lessonId,
-        'user_id': '9',
+        'user_id': MySharedPrefrence().get_user_ID(),
       }), 
     );
 
