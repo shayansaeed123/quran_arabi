@@ -117,7 +117,7 @@ Future<void> answer() async {
     var jsonResponse = json.decode(response.body);
     if (jsonResponse['error']==0) {
       Navigator.pop(context);
-      alerdialogans(context, 'Message', 'You are not allowed to attempt more than 3 times');
+      alerdialogans(context, 'Message', 'You are not allowed to attempt more than 2 times');
     }else{
       Navigator.pop(context);
       alerdialogans(context, 'Message', 'Submited');

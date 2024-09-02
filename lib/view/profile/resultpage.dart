@@ -26,6 +26,7 @@ class _reslutState extends State<reslut> {
 
 
 Future<void> fetchResult() async {
+  print(MySharedPrefrence().get_user_ID());
   final url = Uri.parse('https://quranarbi.turk.pk/api/appUserResults');
 
   try {

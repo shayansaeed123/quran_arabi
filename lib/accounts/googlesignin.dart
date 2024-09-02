@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,6 +16,8 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
    final FirebaseAuth _auth = FirebaseAuth.instance;
    late bool isLoading;
+
+   
 
     Future<void> postData() async {
   var url = 'https://quranarbi.turk.pk/api/verifyAppUser';
@@ -45,7 +48,10 @@ class _SignInScreenState extends State<SignInScreen> {
    
     print("Id no");
     print(body);
-       Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
+      //  Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
+      // MaterialPageRoute(
+      //       builder: (context) =>
+      //           WillPopScope(onWillPop: () async => false, child: Home()));
 
     
     print(response.body);
@@ -118,6 +124,41 @@ void _showAlertDialog(BuildContext context) {
     } finally {
       setState(() {
         isLoading = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    login(context);
+  }
+
+  void login(BuildContext context){
+    final auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
+    print('email ${user}');
+
+    if(user != null){
+      Timer(Duration(seconds: 0), () {
+        print('check user login ${user}');
+        Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                WillPopScope(onWillPop: () async => false, child: Home())),
+      );
+      });
+    }else{
+      Timer(Duration(seconds: 0), () {
+        print('check user without login ${user}');
+      //   Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) =>
+      //           WillPopScope(onWillPop: () async => false, child: SignInScreen())),
+      // );
       });
     }
   }
