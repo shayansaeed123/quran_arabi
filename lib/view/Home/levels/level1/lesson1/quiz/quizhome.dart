@@ -95,6 +95,7 @@ Future<void> answer() async {
   var url = 'https://quranarbi.turk.pk/api/userQuestionsAnswers';  
   print('lessen id $lesson_id');
   print('questions array $selectedData');
+  print('user id ${MySharedPrefrence().get_user_ID()}')
   var body = {
     'user_id': MySharedPrefrence().get_user_ID(),
     'lesson_id': lesson_id.toString(),
