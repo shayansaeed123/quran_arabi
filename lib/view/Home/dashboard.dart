@@ -9,6 +9,7 @@ import 'levels/level1/level1.dart';
 import 'header.dart';
 import 'menubar.dart';
 import 'package:http/http.dart' as http;
+import 'package:quran_arabi/database/mysharedpreferece.dart';
 
 import 'networkheader.dart';
 
@@ -20,6 +21,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 //   Future<List<imageget>> fetchData() async {
 //     var url =Uri.parse("https://quranarbi.turk.pk/api/images");
 //     final response = await http.get(url);

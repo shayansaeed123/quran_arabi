@@ -6,7 +6,7 @@ import '../../function/functions.dart';
 import '../../model/images_get.dart';
 import '../Home/menubar.dart';
 import '../Home/networkheader.dart';
-
+import 'package:quran_arabi/database/mysharedpreferece.dart';
 
 
 class Tasbeeh extends StatefulWidget {

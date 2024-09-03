@@ -7,6 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:quran_arabi/view/Home/dashboard.dart';
 import '../database/mysharedpreferece.dart';
+import 'package:quran_arabi/repo/quran_arabi_repo.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -14,6 +15,8 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+
+  // quranArabiRepository repo = quranArabiRepository();
    final FirebaseAuth _auth = FirebaseAuth.instance;
    late bool isLoading;
 
@@ -23,7 +26,7 @@ class _SignInScreenState extends State<SignInScreen> {
   var url = 'https://quranarbi.turk.pk/api/verifyAppUser';
   
   var body = {
-    'email': MySharedPrefrence().get_user_email(),
+    'email': MySharedPrefrence().get_user_email().toString(),
     'verified': '1',
   };
   
@@ -42,8 +45,10 @@ class _SignInScreenState extends State<SignInScreen> {
     print('Post request successful!');
    final Map<String, dynamic> data = json.decode(response.body);
 
-   MySharedPrefrence().set_user_ID(data['user_id']);
-   print(MySharedPrefrence().get_user_ID());
+   setState(() {});
+   MySharedPrefrence().set_userid(data['user_id']);
+   print(MySharedPrefrence().get_userid());
+   setState(() {});
 
    
     print("Id no");
@@ -55,6 +60,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     
     print(response.body);
+    Navigator.push(context, MaterialPageRoute(builder: (context)=> WillPopScope(child: Home(), onWillPop: () async => false)));
     
   } else {
      _showAlertDialog(context);
@@ -113,12 +119,16 @@ void _showAlertDialog(BuildContext context) {
       }
       MySharedPrefrence().set_user_name(user!.displayName);
       // MySharedPrefrence().setUserLoginStatus(true);
+      setState(() {});
       MySharedPrefrence().set_user_email(user.email);
-      print(MySharedPrefrence().get_user_name());
+      setState(() {});
+      print(MySharedPrefrence().get_user_name().toString());
       // print(MySharedPrefrence().getUserLoginStatus());
-      print(MySharedPrefrence().get_user_email());
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> WillPopScope(child: Home(), onWillPop: () async => false)));
+      print(MySharedPrefrence().get_user_email().toString());
+      // Navigator.push(context, MaterialPageRoute(builder: (context)=> WillPopScope(child: Home(), onWillPop: () async => false)));
+        setState(() {
         postData();
+         });
     } catch (e) {
       print('Error $e');
     } finally {
@@ -132,17 +142,19 @@ void _showAlertDialog(BuildContext context) {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print(MySharedPrefrence().get_userid().toInt());
+    print(MySharedPrefrence().get_user_email().toString());
     login(context);
   }
 
   void login(BuildContext context){
-    final auth = FirebaseAuth.instance;
-    final user = auth.currentUser;
-    print('email ${user}');
+    // final auth = FirebaseAuth.instance;
+    // final user = auth.currentUser;
+    // print('email ${user}');
 
-    if(user != null){
+    if(MySharedPrefrence().get_userid() != 0){
       Timer(Duration(seconds: 0), () {
-        print('check user login ${user}');
+        print('check user login ${MySharedPrefrence().get_userid()}');
         Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -152,7 +164,7 @@ void _showAlertDialog(BuildContext context) {
       });
     }else{
       Timer(Duration(seconds: 0), () {
-        print('check user without login ${user}');
+        print('check user without login ${MySharedPrefrence().get_userid()}');
       //   Navigator.pushReplacement(
       //   context,
       //   MaterialPageRoute(
@@ -203,6 +215,8 @@ void _showAlertDialog(BuildContext context) {
                   label: Text('Sign in with Google'),
                   onPressed: () {
                   signInWithGoogle();
+                  // repo.signInWithGoogle(context);
+                  // print(repo.Registration_text);
                     },
                 ),
               ],
