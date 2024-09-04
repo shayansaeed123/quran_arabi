@@ -147,11 +147,11 @@ void _showAlertDialog(BuildContext context) {
   }
 
   void login(BuildContext context){
-    // final auth = FirebaseAuth.instance;
-    // final user = auth.currentUser;
+    final auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
     // print('email ${user}');
 
-    if(MySharedPrefrence().get_userid() != 0){
+    if(user != null){
       Timer(Duration(seconds: 0), () {
         print('check user login ${MySharedPrefrence().get_userid()}');
         Navigator.pushReplacement(

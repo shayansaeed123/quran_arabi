@@ -46,6 +46,7 @@ class _QuizHomePageState extends State<QuizHomePage> {
     audioPlayer;
     fetchDataQuestion();
     print(lesson_id);
+    print(MySharedPrefrence().get_userid());
   }
 int selectedIdx = -1;
 
