@@ -7,12 +7,16 @@ import '../PrayerTimig/PrayerTiming.dart';
 import '../Quran/Quran.dart';
 import '../Tasbeeh/Tasbeeh.dart';
 import '../profile/profilelist.dart';
+import 'package:quran_arabi/database/mysharedpreferece.dart';
+import 'package:quran_arabi/accounts/googlesignin.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 
 class TopMenu extends StatelessWidget {
-  bool home, namaz_timings, quran, hadith, tasbeeh,profile;
+  bool home, namaz_timings, quran, hadith, tasbeeh,profile,logout;
 
-  TopMenu(this.home, this.namaz_timings, this.quran, this.hadith, this.tasbeeh, this.profile);
+  TopMenu(this.home, this.namaz_timings, this.quran, this.hadith, this.tasbeeh, this.profile,this.logout);
 
   @override
   Widget build(BuildContext context) {
@@ -154,6 +158,29 @@ class TopMenu extends StatelessWidget {
                     builder: (context) => myprofile(),
                   ),
                 );
+              }
+            },
+          ),
+          IconButton(
+            icon: 
+            Image.asset(logout?"assets/images/myprofile.png":"assets/images/myprofile.png"), 
+            onPressed: () async{
+              if (!quran)  {
+  MySharedPrefrence().logout();
+  MySharedPrefrence().setUserLoginStatus(false);
+  GoogleSignIn _googleSignIn = GoogleSignIn();
+  await _googleSignIn.signOut();
+   FirebaseAuth auth = FirebaseAuth.instance;
+  await auth.signOut().then((value) {
+     Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => WillPopScope(
+                                          onWillPop: () async => false,
+                                          child: SignInScreen())),
+                                );
+  });
+  print('User signed out');
+
               }
             },
           ),

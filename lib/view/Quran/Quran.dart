@@ -84,7 +84,7 @@ class _QuranState extends State<Quran> {
               );
             },
           ),
-                   TopMenu(false, false, false, false, false,false),
+                   TopMenu(false, false, false, false, false,false,false),
                   Container(
                     width: double.infinity,
                     child: FutureBuilder<List<SurahModal>>(
