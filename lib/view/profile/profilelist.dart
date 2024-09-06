@@ -21,19 +21,19 @@ class _myprofileState extends State<myprofile> {
   void initState() {
     super.initState();
     futureLessons = fetchLessons();
-    print(MySharedPrefrence().get_userid());
+    print(MySharedPrefrence().get_user_id());
   }
 
 
 Future<List<Lesson>> fetchLessons() async {
-  print(MySharedPrefrence().get_userid());
+  print(MySharedPrefrence().get_user_id());
   final response = await http.post(
     Uri.parse('https://quranarbi.turk.pk/api/appUserLessons'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(<String, dynamic>{
-      'user_id': MySharedPrefrence().get_userid(),
+      'user_id': MySharedPrefrence().get_user_id(),
     }),
   );
 

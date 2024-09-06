@@ -39,8 +39,8 @@ class quranArabiRepository{
     print('Post request successful!');
    final Map<String, dynamic> data = json.decode(response.body);
 
-   MySharedPrefrence().set_userid(data['user_id']);
-   print(MySharedPrefrence().get_userid());
+   MySharedPrefrence().set_user_id(data['user_id']);
+   print(MySharedPrefrence().get_user_id());
 
    
     print("Id no");

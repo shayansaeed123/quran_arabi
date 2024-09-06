@@ -46,7 +46,7 @@ class _QuizHomePageState extends State<QuizHomePage> {
     audioPlayer;
     fetchDataQuestion();
     print(lesson_id);
-    print(MySharedPrefrence().get_userid());
+    print(MySharedPrefrence().get_user_id());
   }
 int selectedIdx = -1;
 
@@ -96,9 +96,9 @@ Future<void> answer() async {
   var url = 'https://quranarbi.turk.pk/api/userQuestionsAnswers';  
   print('lessen id $lesson_id');
   print('questions array $selectedData');
-  print('user id ${MySharedPrefrence().get_userid()}');
+  print('user id ${MySharedPrefrence().get_user_id()}');
   var body = {
-    'user_id': MySharedPrefrence().get_userid(),
+    'user_id': MySharedPrefrence().get_user_id(),
     'lesson_id': lesson_id.toString(),
     'questions': selectedData,
   };

@@ -26,7 +26,7 @@ class _reslutState extends State<reslut> {
 
 
 Future<void> fetchResult() async {
-  print(MySharedPrefrence().get_userid());
+  print(MySharedPrefrence().get_user_id());
   final url = Uri.parse('https://quranarbi.turk.pk/api/appUserResults');
 
   try {
@@ -35,7 +35,7 @@ Future<void> fetchResult() async {
       headers: {'Content-Type': 'application/json'}, 
       body: jsonEncode({
         'lesson_id': widget.lessonId,
-        'user_id': MySharedPrefrence().get_userid(),
+        'user_id': MySharedPrefrence().get_user_id(),
       }), 
     );
 

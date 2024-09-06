@@ -45,8 +45,8 @@ class _SignInScreenState extends State<SignInScreen> {
    final Map<String, dynamic> data = json.decode(response.body);
 
    setState(() {});
-   MySharedPrefrence().set_userid(data['user_id']);
-   print(MySharedPrefrence().get_userid());
+   MySharedPrefrence().set_user_id(data['user_id']);
+   print(MySharedPrefrence().get_user_id());
    setState(() {});
 
    
@@ -141,7 +141,7 @@ void _showAlertDialog(BuildContext context) {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(MySharedPrefrence().get_userid().toInt());
+    print(MySharedPrefrence().get_user_id().toInt());
     print(MySharedPrefrence().get_user_email().toString());
     login(context);
   }
@@ -151,9 +151,9 @@ void _showAlertDialog(BuildContext context) {
     final user = auth.currentUser;
     // print('email ${user}');
 
-    if(user != null){
+    if(MySharedPrefrence().get_user_id() != 0){
       Timer(Duration(seconds: 0), () {
-        print('check user login ${MySharedPrefrence().get_userid()}');
+        print('check user login ${MySharedPrefrence().get_user_id()}');
         Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -163,7 +163,7 @@ void _showAlertDialog(BuildContext context) {
       });
     }else{
       Timer(Duration(seconds: 0), () {
-        print('check user without login ${MySharedPrefrence().get_userid()}');
+        print('check user without login ${MySharedPrefrence().get_user_id()}');
       //   Navigator.pushReplacement(
       //   context,
       //   MaterialPageRoute(
