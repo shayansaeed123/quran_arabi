@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quran_arabi/view/hadith/hadith_books.dart';
 // import 'package:qurani_arabi_flutter/view/Tasbeeh/Tasbeeh.dart';
 
 import '../../function/functions.dart';
@@ -78,12 +79,12 @@ class TopMenu extends StatelessWidget {
             icon: Image.asset(hadith?"assets/icon/Hadees-fill.png":"assets/icon/Hadees.png"), 
             onPressed: () {
               if (!hadith) {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => hadith_level(),
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HadithBooks(),
+                  ),
+                );
               }
             },
           ),

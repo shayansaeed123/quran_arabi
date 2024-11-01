@@ -26,7 +26,8 @@ class _SignInScreenState extends State<SignInScreen> {
   var url = 'https://quranarbi.turk.pk/api/verifyAppUser';
   
   var body = {
-    'email': MySharedPrefrence().get_user_email().toString(),
+    // 'email': MySharedPrefrence().get_user_email().toString(),
+    'email': 'Shayan11@gmail.com',
     'verified': '1',
   };
   
@@ -213,7 +214,8 @@ void _showAlertDialog(BuildContext context) {
                   ),
                   label: Text('Sign in with Google'),
                   onPressed: () {
-                  signInWithGoogle();
+                  // signInWithGoogle();
+                  postData();
                   // repo.signInWithGoogle(context);
                   // print(repo.Registration_text);
                     },
