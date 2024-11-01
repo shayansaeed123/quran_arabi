@@ -30,12 +30,6 @@ class TopMenu extends StatelessWidget {
           IconButton(
             icon:
             Image.asset(home?"assets/icon/Home-Fill.png":"assets/icon/Home.png"),
-            // Icon(
-            //   Icons.home_outlined,
-            //   color: home ? Colors.cyan : Color(0xff9e9e9e),
-            //   size: 30,
-            //   // weight: 1,
-            // ),
             onPressed: () {
               if (!home) 
                 Navigator.popUntil(context, (route) => route.isFirst);
@@ -45,11 +39,6 @@ class TopMenu extends StatelessWidget {
           IconButton(
             icon: 
             Image.asset(namaz_timings?"assets/icon/Namaz-Timing-Fill.png":"assets/icon/Namaz-Timing.png"),
-            // Icon(
-            //   Icons.access_time,
-            //   color: namaz_timings ? Colors.cyan : Color(0xff9e9e9e),
-            //   size: 30,
-            // ),
             onPressed: () {
               if (!namaz_timings) {
                 Navigator.push(
