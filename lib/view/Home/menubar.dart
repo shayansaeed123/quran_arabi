@@ -79,20 +79,6 @@ class TopMenu extends StatelessWidget {
                 }
               },
             ),
-            // IconButton(
-            //   icon: 
-            //    Image.asset(tasbeeh?"assets/icon/Tasbeeh-Fill.png":"assets/icon/Tasbeeh.png"),
-            //   onPressed: () {
-            //     if (!tasbeeh) {
-            //       Navigator.push(
-            //           context,
-            //           MaterialPageRoute(
-            //             builder: (context) => Tasbeeh(),
-            //           ),
-            //       );
-            //     }
-            //   },
-            // ),
             SizedBox(
               height: MediaQuery.of(context).size.height*0.6,
               width: MediaQuery.of(context).size.width*0.18,
