@@ -6,6 +6,7 @@ import 'package:quran_arabi/model/images_get.dart';
 import 'package:quran_arabi/view/Home/menubar.dart';
 import 'package:quran_arabi/view/Home/networkheader.dart';
 import 'package:http/http.dart' as http;
+import 'package:quran_arabi/view/hadith/chapters.dart';
 import 'package:quran_arabi/view/hadith/hadiths.dart';
 
 class HadithBooks extends StatefulWidget {
@@ -119,7 +120,7 @@ Future<List<Map<String, dynamic>>> hadithBooks() async {
                             return ListView.builder(
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
-                              itemCount: snapshot.data!.length,
+                              itemCount: snapshot.data!.length -2,
                               itemBuilder: (BuildContext context, int index) {
                                 print("hadith data ${snapshot.data}");
                                 print('book name ${snapshot.data![index]['bookSlug']}');
@@ -168,7 +169,7 @@ class hadith_widget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Hadiths(bookSlug: bookslug,),
+            builder: (context) => Chapters(bookSlug: bookslug,),
           ),
         );
       },
@@ -239,7 +240,7 @@ class hadith_widget extends StatelessWidget {
                           //   textDirection: TextDirection.rtl,
                           // ),
                           Text(
-                            'Hadiths ' + length.toString(),
+                            'Hadith ' + length.toString(),
                             textAlign: TextAlign.start,
                             style: TextStyle(fontSize: 12, color: Colors.black),
                             textDirection: TextDirection.rtl,
