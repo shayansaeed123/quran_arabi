@@ -224,21 +224,6 @@ class hadith_widget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Text(
-                          //   name,
-                          //   textAlign: TextAlign.start,
-                          //   style: TextStyle(
-                          //       fontSize: 16,
-                          //       fontWeight: FontWeight.w500,
-                          //       color: Colors.black),
-                          //   textDirection: TextDirection.rtl,
-                          // ),
-                          // Text(
-                          //   en,
-                          //   textAlign: TextAlign.start,
-                          //   style: TextStyle(fontSize: 13, color: Colors.black),
-                          //   textDirection: TextDirection.rtl,
-                          // ),
                           Text(
                             'Hadith ' + length.toString(),
                             textAlign: TextAlign.start,
