@@ -81,6 +81,7 @@ dev_dependencies:
   firebase_core:
   change_app_package_name:
   rename_app: 
+  hadith: 
 
 
 flutter_icons:

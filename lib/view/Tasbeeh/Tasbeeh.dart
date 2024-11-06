@@ -7,6 +7,7 @@ import '../../model/images_get.dart';
 import '../Home/menubar.dart';
 import '../Home/networkheader.dart';
 import 'package:quran_arabi/database/mysharedpreferece.dart';
+import 'package:hadith/hadith.dart';
 
 
 class Tasbeeh extends StatefulWidget {
@@ -37,6 +38,12 @@ class _TasbeehState extends State<Tasbeeh> {
     });
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(getCollectionURL(Collections.bukhari));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
